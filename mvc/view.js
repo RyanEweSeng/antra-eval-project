@@ -14,7 +14,7 @@ export const View = (() => {
             const pendingTemplate = `
                 <li>
                     <div class="content-container">
-                        <span>${todo.content}</span>
+                        <span id="content-${todo.id}" contenteditable="false">${todo.content}</span>
                     </div>
 
                     <div class="container btn-container">
@@ -31,7 +31,7 @@ export const View = (() => {
                     <button class="btn move-btn" id="${todo.id}">move</button>
                     </div>
                     <div class="content-container">
-                        <span>${todo.content}</span>
+                        <span id="content-${todo.id}" contenteditable="false">${todo.content}</span>
                     </div>
                     <div class="container btn-container">
                         <button class="btn edit-btn" id="${todo.id}">edit</button>

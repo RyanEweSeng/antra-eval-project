@@ -3,7 +3,7 @@ import { View } from './view.js';
 
 export const Controller = ((view, model) => {
     const state = new model.State();
-    const todolists = [ view.pendingTodolistEl, view.completedTodolistEl ];
+    const todolists = document.querySelectorAll(".todo-list");
 
     const init = () => {
         model.getTodos().then((todos) => {
@@ -26,32 +26,52 @@ export const Controller = ((view, model) => {
     const handleDelete = () => {
         // for each todolist we have, we'll add an event listener
         todolists.forEach(list => list.addEventListener("click", (event) => {
-                // get the className we want (since we are using multiple classes)
-                if (event.target.className.split(" ")[1] === "delete-btn") {
-                    const id = event.target.id;
-                    model.deleteTodo(+id).then((data) => {
-                        state.todos = state.todos.filter((todo) => todo.id !== +id);
-                    });
-                }
-            })
-        );
+            // get the className we want (since we are using multiple classes)
+            if (event.target.classList[1] === "delete-btn") {
+                const id = event.target.id;
+                model.deleteTodo(+id).then((data) => {
+                    state.todos = state.todos.filter((todo) => todo.id !== +id);
+                });
+            }
+        }));
     };
 
     const handleMove = () => {
         // for each todolist we have, we'll add an event listener
         todolists.forEach(list => list.addEventListener("click", (event) => {
-                // get the className we want (since we are using multiple classes)
-                if (event.target.className.split(" ")[1] === "move-btn") {
-                    const id = event.target.id;
-                    const data = state.todos.filter(todo => todo.id == id);  // find the data of the target
-                    const newData = { // create new data with toggled isCompleted field
-                        content: data[0].content,
-                        isCompleted: !data[0].isCompleted,
+            // get the className we want (since we are using multiple classes)
+            if (event.target.classList[1] === "move-btn") {
+                const id = event.target.id;
+                const todo = state.todos.find(todo => todo.id == id);  // find the data of the target
+                const newTodo = { // create new data with toggled isCompleted field
+                    content: todo.content,
+                    isCompleted: !todo.isCompleted,
+                };
+                model.updateTodo(+id, newTodo);
+            }
+        }));
+    };
+
+    const handleEdit = () => {
+        todolists.forEach(list => list.addEventListener("click", (event) => {
+            if (event.target.classList[1] === "edit-btn") {
+                const id = event.target.id;
+                const spanEl = document.querySelector("#content-"+id); // query for the respective span
+                const contenteditable = spanEl.getAttribute("contenteditable");
+                spanEl.setAttribute("contenteditable", contenteditable === "false" ? "true" : "false");
+                spanEl.focus();
+
+                // update content only if contenteditable is false
+                if (spanEl.getAttribute("contenteditable") === 'false') {
+                    const todo = state.todos.find(todo => todo.id == id);
+                    const newTodo = {
+                        content: spanEl.innerHTML,
+                        isCompleted: todo.isCompleted,
                     };
-                    model.updateTodo(+id, newData);
+                    model.updateTodo(+id, newTodo);
                 }
-            })
-        );
+            }
+        }));
     };
 
     const bootstrap = () => {
@@ -59,6 +79,7 @@ export const Controller = ((view, model) => {
         handleSubmit();
         handleDelete();
         handleMove();
+        handleEdit();
         state.subscribe(() => {
             view.renderTodos(state.todos);
         });
