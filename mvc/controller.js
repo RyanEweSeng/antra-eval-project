@@ -43,7 +43,12 @@ export const Controller = ((view, model) => {
                 // get the className we want (since we are using multiple classes)
                 if (event.target.className.split(" ")[1] === "move-btn") {
                     const id = event.target.id;
-                    model.updateTodo(+id);
+                    const data = state.todos.filter(todo => todo.id == id);  // find the data of the target
+                    const newData = { // create new data with toggled isCompleted field
+                        content: data[0].content,
+                        isCompleted: !data[0].isCompleted,
+                    };
+                    model.updateTodo(+id, newData);
                 }
             })
         );
