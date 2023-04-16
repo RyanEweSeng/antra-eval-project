@@ -44,7 +44,9 @@ export const Controller = ((view, model) => {
                 const id = event.target.id;
                 const todo = state.todos.find(todo => todo.id == id);  // find the data of the target
                 todo.isCompleted = !todo.isCompleted;
-                model.updateTodo(+id, todo).then((data) => { });
+                model.updateTodo(+id, todo).then((data) => {
+                    state.todos = state.todos;
+                });
             }
         }));
     };
@@ -62,7 +64,9 @@ export const Controller = ((view, model) => {
                 if (spanEl.getAttribute("contenteditable") === 'false') {
                     const todo = state.todos.find(todo => todo.id == id);
                     todo.content = spanEl.innerHTML; // update todo content
-                    model.updateTodo(+id, todo).then((data) => { });
+                    model.updateTodo(+id, todo).then((data) => {
+                        state.todos = state.todos;
+                    });
                 }
             }
         }));
