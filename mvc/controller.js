@@ -18,6 +18,7 @@ export const Controller = ((view, model) => {
             const inputValue = view.inputEl.value;
             model.createTodo({ content: inputValue, isCompleted: false }).then((data) => {
                 state.todos = [data, ...state.todos];
+                console.log(state.todos)
                 view.clearInput();
             });
         });
