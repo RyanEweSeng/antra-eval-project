@@ -11,12 +11,19 @@
         <div class="app">
             <h1>TodoList</h1>
             <div class="form">
-                <input class="input" /><button class="submit-btn">
-                    submit
-                </button>
+                <input class="input">
+                    <button class="btn submit-btn">submit</button>
+                </input>
             </div>
-            <div>
-                <ul class="todo-list"></ul>
+            <div class="container main-container">
+                <div class="container sub-container">
+                    <h4 class="label">Pending Tasks</h4>
+                    <ul class="todo-list pending"></ul>
+                </div>
+                <div class="container sub-container">
+                    <h4 class="label">Completed Tasks</h4>
+                    <ul class="todo-list completed"></ul>
+                </div>
             </div>
         </div>
 
