@@ -15,14 +15,10 @@ export const APIs = (() => {
         }).then((res) => res.json());
     };
 
-    const updateTodo = (id) => {
-        // we need to toggle the isCompleted field
-        // grab the targetTodo and send a PATCH request
+    const updateTodo = (id, data) => {
         return fetch([baseUrl, todoPath, id].join('/'), {
-            method: "PATCH",
-            body: JSON.stringify({
-                isCompleted: true
-            }),
+            method: "PUT",
+            body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" },
         }).then((res) => res.json());
     };
