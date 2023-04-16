@@ -1,8 +1,59 @@
 {
   "todos": [
     {
-      "content": "sdsd",
+      "content": "There should be total 5 http requests",
+      "isCompleted": false,
       "id": 1
+    },
+    {
+      "content": "CRUD operation should be performed for all 4 buttons",
+      "isCompleted": false,
+      "id": 2
+    },
+    {
+      "content": "Give some thought about the data structure",
+      "isCompleted": false,
+      "id": 3
+    },
+    {
+      "content": "What's more than the original to-do list",
+      "isCompleted": false,
+      "id": 4
+    },
+    {
+      "content": "Make a symmetrical layout",
+      "isCompleted": false,
+      "id": 5
+    },
+    {
+      "content": "Functional first, stylish second",
+      "isCompleted": false,
+      "id": 6
+    },
+    {
+      "content": "Build two lists, pending list and completed list",
+      "isCompleted": true,
+      "id": 7
+    },
+    {
+      "content": "Build 3 buttons for each todo task",
+      "isCompleted": true,
+      "id": 8
+    },
+    {
+      "content": "Bind event handler for buttons",
+      "isCompleted": true,
+      "id": 9
+    },
+    {
+      "content": "Get to-do data from json server at the beginning",
+      "isCompleted": true,
+      "id": 10
+    },
+    {
+      "content": "Apply some style as you like",
+      "isCompleted": true,
+      "id": 11
     }
   ]
 }
