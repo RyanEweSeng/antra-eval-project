@@ -18,7 +18,6 @@ export const Controller = ((view, model) => {
             const inputValue = view.inputEl.value;
             model.createTodo({ content: inputValue, isCompleted: false }).then((data) => {
                 state.todos = [data, ...state.todos];
-                console.log(state.todos)
                 view.clearInput();
             });
         });
@@ -44,11 +43,8 @@ export const Controller = ((view, model) => {
             if (event.target.classList[1] === "move-btn") {
                 const id = event.target.id;
                 const todo = state.todos.find(todo => todo.id == id);  // find the data of the target
-                const newTodo = { // create new data with toggled isCompleted field
-                    content: todo.content,
-                    isCompleted: !todo.isCompleted,
-                };
-                model.updateTodo(+id, newTodo);
+                todo.isCompleted = !todo.isCompleted;
+                model.updateTodo(+id, todo).then((data) => { });
             }
         }));
     };
@@ -65,11 +61,8 @@ export const Controller = ((view, model) => {
                 // update content only if contenteditable is false
                 if (spanEl.getAttribute("contenteditable") === 'false') {
                     const todo = state.todos.find(todo => todo.id == id);
-                    const newTodo = {
-                        content: spanEl.innerHTML,
-                        isCompleted: todo.isCompleted,
-                    };
-                    model.updateTodo(+id, newTodo);
+                    todo.content = spanEl.innerHTML; // update todo content
+                    model.updateTodo(+id, todo).then((data) => { });
                 }
             }
         }));
