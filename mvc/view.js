@@ -13,30 +13,19 @@ export const View = (() => {
         todos.forEach((todo) => {
             const pendingTemplate = `
                 <li>
-                    <div class="content-container">
-                        <span id="content-${todo.id}" contenteditable="false">${todo.content}</span>
-                    </div>
-
-                    <div class="container btn-container">
-                        <button class="btn edit-btn" id="${todo.id}">edit</button>
-                        <button class="btn delete-btn" id="${todo.id}">delete</button>
-                        <button class="btn move-btn" id="${todo.id}">move</button>
-                    </div>
+                    <span class="content-container" id="content-${todo.id}" contenteditable="false">${todo.content}</span>
+                    <button class="btn edit-btn" id="${todo.id}">edit</button>
+                    <button class="btn delete-btn" id="${todo.id}">delete</button>
+                    <button class="btn move-btn" id="${todo.id}">move</button>
                 </li>
             `;
 
             const completedTemplate = `
                 <li>
-                    <div class="container btn-container">
                     <button class="btn move-btn" id="${todo.id}">move</button>
-                    </div>
-                    <div class="content-container">
-                        <span id="content-${todo.id}" contenteditable="false">${todo.content}</span>
-                    </div>
-                    <div class="container btn-container">
-                        <button class="btn edit-btn" id="${todo.id}">edit</button>
-                        <button class="btn delete-btn" id="${todo.id}">delete</button>
-                    </div>
+                    <span class="content-container" id="content-${todo.id}" contenteditable="false">${todo.content}</span>
+                    <button class="btn edit-btn" id="${todo.id}">edit</button>
+                    <button class="btn delete-btn" id="${todo.id}">delete</button>
                 </li>
             `;
 
